@@ -2,7 +2,9 @@
 
 
 npm install react-native-elements
+
 npm install react-native-vector-icons
+
 npm install react-native-safe-area-context
 
 
