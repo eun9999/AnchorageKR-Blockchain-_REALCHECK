@@ -16,6 +16,8 @@ target 'temp' do
 
   pod 'RNSqlite2', :path => '../node_modules/react-native-sqlite-2'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'tempTests' do
     inherit! :complete
     # Pods for testing
