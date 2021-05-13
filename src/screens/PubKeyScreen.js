@@ -4,7 +4,7 @@ import {Button, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import style from '../components/styles';
-import SQLite from 'react-native-sqlite-storage';
+import SQLite from 'react-native-sqlite-2';
 
 var db = SQLite.openDatabase({name: 'pubKey.db'});
 class PubKeyScreen extends Component {
@@ -24,7 +24,8 @@ class PubKeyScreen extends Component {
         <View>
           <TextInput
             alignItems="stretch"
-            style={style.TextInput}
+            style={style.TextInputs}
+            s
             onChangeText={this.changeText}
             placeholder="Input your address name"></TextInput>
         </View>
