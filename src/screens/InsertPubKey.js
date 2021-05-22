@@ -6,10 +6,12 @@ import {
   Alert,
   SafeAreaView,
   Text,
+  FlatList,
 } from 'react-native';
 import Mytextinput from '../components/Mytextinput';
 import Mybutton from '../components/Mybutton';
 import SQLite from 'react-native-sqlite-2';
+import style from '../components/styles';
 
 var db = '';
 if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
@@ -21,8 +23,9 @@ if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
 const RegisterUser = ({navigation}) => {
   let [userName, setUserName] = useState('');
   let [userPubKey, setUserPubKey] = useState('');
+  let [flatListItems, setFlatListItems] = useState([]);
 
-  let register_user = () => {
+  let registerKey = () => {
     if (!userName) {
       alert('Please fill name');
       return;
@@ -33,6 +36,7 @@ const RegisterUser = ({navigation}) => {
     }
 
     db.transaction(tx => {
+      //tx.executeSql('DELETE FROM pubKey');
       tx.executeSql(
         'CREATE TABLE IF NOT EXISTS pubKey(name TEXT, key TEXT PRIMARY KEY NOT NULL)',
       );
@@ -42,10 +46,13 @@ const RegisterUser = ({navigation}) => {
       );
       tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
         for (let i = 0; i < res.rows.length; ++i) {
-          console.log('item: ', res.rows.item(i));
+          console.log(res.rows.item(i));
         }
       });
     });
+
+    setUserName('');
+    setUserPubKey('');
   };
 
   return (
@@ -58,17 +65,20 @@ const RegisterUser = ({navigation}) => {
               style={{flex: 1, justifyContent: 'space-between'}}>
               <Mytextinput
                 placeholder="Enter Name"
+                value={userName}
                 onChangeText={userName => setUserName(userName)}
                 style={{padding: 10}}
               />
               <Mytextinput
                 placeholder="Enter PubKey"
+                value={userPubKey}
                 onChangeText={userPubKey => setUserPubKey(userPubKey)}
-                maxLength={225}
+                maxLength={256}
                 multiline={true}
                 style={{textAlignVertical: 'top', padding: 10}}
               />
-              <Mybutton title="Submit" customClick={register_user} />
+              <Mybutton title="Submit" customClick={registerKey} />
+              <Text style={style.text}>PubKey List</Text>
             </KeyboardAvoidingView>
           </ScrollView>
         </View>

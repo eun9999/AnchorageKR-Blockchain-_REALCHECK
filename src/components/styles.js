@@ -4,7 +4,7 @@ const style = StyleSheet.create({
   root: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    //justifyContent: 'space-between',
   },
   Header: {
     width: '100%',
@@ -22,7 +22,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
   },
   Body: {
-    flex: 7,
+    flex: 10,
     width: '100%',
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -30,7 +30,7 @@ const style = StyleSheet.create({
   },
   Footer: {
     width: '100%',
-    flex: 1,
+    flex: 2,
     backgroundColor: 'white',
     alignItems: 'flex-end',
   },
@@ -38,6 +38,15 @@ const style = StyleSheet.create({
     fontSize: 30,
     color: 'orange',
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  ListView: {
+    width: '100%',
+    height: '80%',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   TextInput: {
     width: '60%',

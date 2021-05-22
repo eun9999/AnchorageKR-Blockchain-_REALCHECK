@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {Component, useEffect } from 'react';
+import React, {Component, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Text, View, Button, TextInput, StyleSheet} from 'react-native';
@@ -8,9 +8,7 @@ import PubKeyScreen from './src/screens/PubKeyScreen';
 import InsertPubKey from './src/screens/InsertPubKey';
 import ViewAll from './src/screens/ViewAll';
 //스플래시 액티비티 추가
-import SplashScreen from 'react-native-splash-screen'
-
-
+import SplashScreen from 'react-native-splash-screen';
 
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -21,7 +19,7 @@ class App extends Component {
     //스플래시 액티비티 화면 구성(1초)
     setTimeout(() => {
       SplashScreen.hide();
-  }, 1000);
+    }, 1000);
 
     return (
       <NavigationContainer>

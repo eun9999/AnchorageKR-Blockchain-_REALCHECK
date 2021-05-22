@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
-import {Button, View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import style from '../components/styles';
 
 function HomeScreen({navigation}) {
   return (
-    <View style={style.root}>
+    <SafeAreaView style={style.root}>
       <View style={style.Header}>
         <TouchableOpacity alignItem="flex-end">
           <Image
@@ -14,9 +21,6 @@ function HomeScreen({navigation}) {
             source={require('../Assets/images/settings.png')}
           />
         </TouchableOpacity>
-      </View>
-      <View style={style.Title}>
-        <Text style={style.text}> Transaction Watch Bot </Text>
       </View>
       <View style={style.Body}>
         <Text>body</Text>
@@ -29,17 +33,15 @@ function HomeScreen({navigation}) {
             onPress={() => navigation.navigate('InsertPubKey')}>
             <Text>Insert Public Key</Text>
           </TouchableOpacity>
-        </View>
-        <View>
           <TouchableOpacity
-            alignItem="flex-start"
+            alignItem="flex-end"
             style={style.insertBtn}
             onPress={() => navigation.navigate('ViewAll')}>
-            <Text>View All</Text>
+            <Text>ViewAll</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 export default HomeScreen;
