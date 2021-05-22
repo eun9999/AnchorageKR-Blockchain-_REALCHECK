@@ -1,40 +1,45 @@
-import 'react-native-gesture-handler';
-import React, {Component, useEffect} from 'react';
+import React from 'react';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Text, View, Button, TextInput, StyleSheet} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+//import SplashScreen from 'react-native-splash-screen';
 import HomeScreen from './src/screens/HomeScreen';
-import PubKeyScreen from './src/screens/PubKeyScreen';
 import InsertPubKey from './src/screens/InsertPubKey';
-import ViewAll from './src/screens/ViewAll';
-//스플래시 액티비티 추가
+import SettingScreen from './src/screens/SettingScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen';
 
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+const Tab = createBottomTabNavigator();
 
-const Stack = createStackNavigator();
-
-class App extends Component {
-  render() {
-    //스플래시 액티비티 화면 구성(1초)
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 1000);
-
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Transaction Watch Bot" component={HomeScreen} />
-          <Stack.Screen name="PubKeyScreen" component={PubKeyScreen} />
-          <Stack.Screen name="InsertPubKey" component={InsertPubKey} />
-          <Stack.Screen name="ViewAll" component={ViewAll} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
-  //clickBtn = () => {
-  //  this.setState({key: this.inputText});
-  //};
+export default function App() {
+  setTimeout(() => {
+    SplashScreen.hide();
+  }, 10);
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color, size}) => {
+            let iconName;
+            if (route.name === 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'PubKey') {
+              iconName = focused ? 'key' : 'key-outline';
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'settings' : 'settings-outline';
+            }
+            return <Icon name={iconName} size={size} color={'#424242'} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: '#424242',
+          inactiveTintColor: 'gray',
+        }}>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="PubKey" component={InsertPubKey} />
+        <Tab.Screen name="Settings" component={SettingScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
-
-export default App;

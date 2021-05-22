@@ -12,6 +12,7 @@ import Mytextinput from '../components/Mytextinput';
 import Mybutton from '../components/Mybutton';
 import SQLite from 'react-native-sqlite-2';
 import style from '../components/styles';
+import {ListView} from 'react-native';
 
 var db = '';
 if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
@@ -23,8 +24,11 @@ if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
 const RegisterUser = ({navigation}) => {
   let [userName, setUserName] = useState('');
   let [userPubKey, setUserPubKey] = useState('');
-  let [flatListItems, setFlatListItems] = useState([]);
-
+  let [flatListItems, setFlatListItems] = useState('');
+  var name = '';
+  var key = '';
+  name = userName;
+  key = userPubKey;
   let registerKey = () => {
     if (!userName) {
       alert('Please fill name');
@@ -50,7 +54,6 @@ const RegisterUser = ({navigation}) => {
         }
       });
     });
-
     setUserName('');
     setUserPubKey('');
   };
