@@ -22,6 +22,7 @@ const Mytextinput = props => {
         numberOfLines={props.numberOfLines}
         multiline={props.multiline}
         onSubmitEditing={props.onSubmitEditing}
+        autoCapitalize={'none'}
         style={props.style}
         blurOnSubmit={false}
         value={props.value}

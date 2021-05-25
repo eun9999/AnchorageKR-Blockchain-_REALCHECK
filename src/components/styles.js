@@ -37,6 +37,7 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 30,
+    marginTop: 30,
     color: '#424242',
     fontWeight: 'bold',
     textAlign: 'center',

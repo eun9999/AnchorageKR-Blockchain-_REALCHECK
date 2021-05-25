@@ -12,7 +12,6 @@ import Mytextinput from '../components/Mytextinput';
 import Mybutton from '../components/Mybutton';
 import SQLite from 'react-native-sqlite-2';
 import style from '../components/styles';
-import {ListView} from 'react-native';
 
 var db = '';
 if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
@@ -24,11 +23,10 @@ if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
 const RegisterUser = ({navigation}) => {
   let [userName, setUserName] = useState('');
   let [userPubKey, setUserPubKey] = useState('');
-  let [flatListItems, setFlatListItems] = useState('');
-  var name = '';
-  var key = '';
-  name = userName;
-  key = userPubKey;
+  // let [nameList, setNameList] = useState([]);
+  // let [PubKeyList, setPubKeyList] = useState([]);
+  let [list, setList] = useState([]);
+
   let registerKey = () => {
     if (!userName) {
       alert('Please fill name');
@@ -48,42 +46,90 @@ const RegisterUser = ({navigation}) => {
         'INSERT INTO pubKey (name, key) VALUES (:userName, :userPubKey)',
         [userName, userPubKey],
       );
+    });
+    db.transaction(tx => {
       tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
+        var temp = [];
         for (let i = 0; i < res.rows.length; ++i) {
-          console.log(res.rows.item(i));
+          console.log(res.rows.length);
+          temp.push(res.rows.item(i));
+          setList(temp);
         }
+        console.log(list);
       });
     });
+
     setUserName('');
     setUserPubKey('');
+    // setNameList([...nameList, userName]);
+    // setPubKeyList([...PubKeyList, userPubKey]);
+    console.log('list:');
+    console.log(list);
   };
 
+  let Delete = () => {
+    db.transaction(tx => {
+      tx.executeSql('DELETE FROM pubKey');
+    });
+    setList([]);
+  };
+
+  let listItemView = item => {
+    return (
+      <View
+        key={item.key}
+        style={{
+          backgroundColor: 'white',
+          marginTop: 10,
+          marginBottom: 10,
+          marginLeft: 10,
+          marginRight: 10,
+          padding: 10,
+          borderColor: '#424242',
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderLeftWidth: 1,
+          borderRightWidth: 1,
+          borderRadius: 8,
+        }}>
+        <Text>Name : {item.name}</Text>
+        <Text>Key : {item.key}</Text>
+      </View>
+    );
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <View style={{flex: 1}}>
-          <ScrollView keyboardShouldPersistTaps="handled">
-            <KeyboardAvoidingView
-              behavior="padding"
-              style={{flex: 1, justifyContent: 'space-between'}}>
-              <Mytextinput
-                placeholder="Enter Name"
-                value={userName}
-                onChangeText={userName => setUserName(userName)}
-                style={{padding: 10}}
-              />
-              <Mytextinput
-                placeholder="Enter PubKey"
-                value={userPubKey}
-                onChangeText={userPubKey => setUserPubKey(userPubKey)}
-                maxLength={256}
-                multiline={true}
-                style={{textAlignVertical: 'top', padding: 10}}
-              />
-              <Mybutton title="Submit" customClick={registerKey} />
-              <Text style={style.text}>PubKey List</Text>
-            </KeyboardAvoidingView>
-          </ScrollView>
+          <View
+            behavior="padding"
+            style={{flex: 1, justifyContent: 'space-between'}}>
+            <Mytextinput
+              placeholder="Enter Name"
+              value={userName}
+              onChangeText={userName => setUserName(userName)}
+              style={{padding: 10}}
+            />
+            <Mytextinput
+              placeholder="Enter Address"
+              value={userPubKey}
+              onChangeText={userPubKey => setUserPubKey(userPubKey)}
+              maxLength={256}
+              multiline={true}
+              style={{textAlignVertical: 'top', padding: 10}}
+            />
+            <Mybutton title="Submit" customClick={registerKey} />
+            <Mybutton title="Delete" customClick={Delete} />
+            <Text style={style.text}>Address List</Text>
+            <View style={{flex: 1, backgroundColor: 'white'}}>
+              <KeyboardAvoidingView style={{flex: 1}}>
+                <FlatList
+                  data={list}
+                  renderItem={({item}) => listItemView(item)}
+                />
+              </KeyboardAvoidingView>
+            </View>
+          </View>
         </View>
       </View>
     </SafeAreaView>
