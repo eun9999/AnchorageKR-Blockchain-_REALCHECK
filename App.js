@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-//import SplashScreen from 'react-native-splash-screen';
+
 import HomeScreen from './src/screens/HomeScreen';
 import InsertPubKey from './src/screens/InsertPubKey';
 import SettingScreen from './src/screens/SettingScreen';
