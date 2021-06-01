@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@egjs/hammerjs": "2.0.17",
+    "@react-native-community/checkbox": "0.5.7",
     "@react-native-community/masked-view": "0.1.11",
     "@react-navigation/bottom-tabs": "5.11.11",
     "@react-navigation/native": "5.9.4",
@@ -29,6 +30,7 @@
     "react-native-vector-icons": "8.1.0",
     "react-simple-timefield": "3.2.3",
     "react-time-input": "0.0.19"
+    
   },
   "devDependencies": {
     "@babel/core": "7.13.16",

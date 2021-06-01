@@ -88,6 +88,23 @@ const style = StyleSheet.create({
     backgroundColor: '#424242',
     borderRadius: 8,
   },
+  container: {
+
+    alignItems: "center",
+    justifyContent: "center",
+
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+
+    marginTop: 50,
+  },
+  checkbox: {
+    alignSelf: "center",
+  },
+  label: {
+    margin: 10,
+  },
 });
 
 export default style;
