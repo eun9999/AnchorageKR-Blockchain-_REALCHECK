@@ -113,7 +113,7 @@ const RegisterUser = ({navigation}) => {
           marginBottom: 10,
           marginLeft: 10,
           marginRight: 10,
-          padding: 10,
+          paddingLeft: 5,
           borderColor: '#424242',
           borderTopWidth: 1,
           borderBottomWidth: 1,
@@ -124,8 +124,8 @@ const RegisterUser = ({navigation}) => {
           justifyContent: 'space-between',
         }}>
         <View>
-          <Text>Name : {item.name}</Text>
-          <Text>Address : {item.key}</Text>
+          <Text style={style.smalltext}>{item.name}</Text>
+          <Text style={style.smalltext}>{item.key}</Text>
         </View>
         <View>
           <TouchableOpacity
@@ -145,7 +145,7 @@ const RegisterUser = ({navigation}) => {
   };
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: '#525252'}}>
         <View style={{flex: 1}}>
           <View
             behavior="padding"
@@ -167,7 +167,7 @@ const RegisterUser = ({navigation}) => {
             <Mybutton title="Submit" customClick={registerKey} />
             <Mybutton title="Delete" customClick={Delete} />
             <Text style={style.text}>Address List</Text>
-            <View style={{flex: 1, backgroundColor: 'white'}}>
+            <View style={{flex: 1, backgroundColor: '#525252'}}>
               <KeyboardAvoidingView style={{flex: 1}}>
                 <FlatList
                   data={list}

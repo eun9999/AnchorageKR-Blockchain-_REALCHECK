@@ -12,16 +12,19 @@ const Mybutton = props => {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#424242',
+    backgroundColor: '#8B1919',
     borderRadius: 8,
-    color: '#ffffff',
+    color: 'white',
     padding: 10,
-    marginTop: 16,
-    marginLeft: 35,
-    marginRight: 35,
+    marginTop: 8,
+    marginLeft: 120,
+    marginRight: 120,
+    marginBottom: 8,
   },
   text: {
     color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 30,
   },
 });
 

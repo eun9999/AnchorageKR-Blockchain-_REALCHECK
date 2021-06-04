@@ -29,12 +29,15 @@ export default function App() {
             } else if (route.name === 'Settings') {
               iconName = focused ? 'settings' : 'settings-outline';
             }
-            return <Icon name={iconName} size={size} color={'#424242'} />;
+            return <Icon name={iconName} size={size} color={'white'} />;
           },
         })}
         tabBarOptions={{
-          activeTintColor: '#424242',
-          inactiveTintColor: 'gray',
+          style: {
+            backgroundColor: 'black',
+          },
+          activeTintColor: 'white',
+          inactiveTintColor: 'white',
         }}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="PubKey" component={InsertPubKey} />

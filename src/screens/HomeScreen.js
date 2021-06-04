@@ -12,18 +12,16 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import SQLite from 'react-native-sqlite-2';
+
+import style from '../components/styles';
 import {
   createChannel,
   showNotification,
   handleScheduleNotification,
   handleCancel,
 } from './src/notification';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-import SQLite from 'react-native-sqlite-2';
-
-import style from '../components/styles';
-import {create} from 'eslint/lib/rules/*';
 
 var db = '';
 db = SQLite.openDatabase('pubKey.db', '1.0', '', 1);
@@ -63,10 +61,9 @@ function HomeScreen({navigation}) {
   return (
     <SafeAreaView style={style.root}>
       <View style={style.Header}>
-        <Text style={{color: 'white'}}>Watch Bot</Text>
+        <Text style={style.text}> Watch Bot </Text>
       </View>
       <View style={style.Body}>
-        <Text>body</Text>
         <KeyboardAvoidingView style={{flex: 1}}>
           <FlatList />
         </KeyboardAvoidingView>
@@ -85,12 +82,12 @@ function HomeScreen({navigation}) {
   );
 }
 export default HomeScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#525252',
   },
   button: {
     padding: 16,

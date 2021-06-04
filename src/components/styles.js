@@ -12,7 +12,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#424242',
+    backgroundColor: '#525252',
   },
   Title: {
     width: '100%',
@@ -25,7 +25,7 @@ const style = StyleSheet.create({
   Body: {
     width: '100%',
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#525252',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -37,10 +37,15 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    marginTop: 30,
-    color: '#424242',
+    color: 'white',
+    fontStyle: 'italic',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  smalltext: {
+    fontSize: 15,
+    color: '#525252',
+    fontStyle: 'normal',
   },
   ListView: {
     width: '100%',
@@ -49,20 +54,6 @@ const style = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     marginBottom: 10,
-  },
-  TextInput: {
-    width: '60%',
-    borderWidth: 2,
-    backgroundColor: 'white',
-    borderColor: '#424242',
-    borderRadius: 8,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 40,
   },
   btn: {
     marginLeft: 10,
@@ -76,34 +67,30 @@ const style = StyleSheet.create({
     backgroundColor: '#424242',
     borderRadius: 8,
   },
-  insertBtn: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    height: 40,
-    width: 150,
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#424242',
-    borderRadius: 8,
-  },
-  container: {
-
-    alignItems: "center",
-    justifyContent: "center",
-
   },
   checkboxContainer: {
-    flexDirection: "row",
-
+    flexDirection: 'row',
     marginTop: 50,
+    color: 'white',
   },
   checkbox: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   label: {
     margin: 10,
+    fontSize: 15,
+    color: 'white',
+  },
+  input: {
+    width: 50,
+    height: 40,
+    backgroundColor: 'white',
+    color: '#525252',
+    fontSize: 15,
+    textAlign: 'center',
   },
 });
 
