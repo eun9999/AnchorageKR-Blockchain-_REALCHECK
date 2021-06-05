@@ -94,6 +94,7 @@ const style = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  
 });
 
 export default style;
