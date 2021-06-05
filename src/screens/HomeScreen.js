@@ -23,6 +23,9 @@ import {
   handleCancel,
 } from './src/notification';
 
+
+
+
 var db = '';
 db = SQLite.openDatabase('pubKey.db', '1.0', '', 1);
 
@@ -63,12 +66,18 @@ function HomeScreen({navigation}) {
       <View style={style.Header}>
         <Text style={style.text}> Watch Bot </Text>
       </View>
+
+      
+
+      
+      
       <View style={style.Body}>
         <KeyboardAvoidingView style={{flex: 1}}>
           <FlatList />
         </KeyboardAvoidingView>
       </View>
       <View style={styles.container}>
+        
         <Text>Push Notification</Text>
         <TouchableOpacity
           activeOpacity={(0, 6)}
@@ -99,3 +108,4 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+

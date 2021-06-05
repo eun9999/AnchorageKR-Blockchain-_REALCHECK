@@ -1,6 +1,13 @@
 import {StyleSheet} from 'react-native';
 
+
 const style = StyleSheet.create({
+  placeholder : {
+    label: 'min',
+    value: null,
+    fontSize: 8,
+  },
+
   root: {
     flex: 1,
     flexDirection: 'column',
