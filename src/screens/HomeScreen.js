@@ -28,8 +28,21 @@ db = SQLite.openDatabase('pubKey.db', '1.0', '', 1);
 
 function HomeScreen({navigation}) {
   let [addressList, setAddressList] = useState([]);
+  let [txInfo, setTxInfo] = useState([]);
 
-  var info = [];
+  const addressApiCall = async addr => {
+    try {
+      const response = await axios.get(
+        'https://api.blockcypher.com/v1/btc/main/addrs/' + addr,
+      );
+      setTxInfo(response.data);
+      //console.log(response.data);
+      //console.log(response.data.address + '\'s info load success');
+    } catch (e) {
+      console.error(addr + "'s info load failed");
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
     db.transaction(tx => {
@@ -42,21 +55,39 @@ function HomeScreen({navigation}) {
       });
     });
     console.log(addressList);
-    const addressApiCall = async addr => {
-      try {
-        const response = await axios.get(
-          'https://api.blockcypher.com/v1/btc/main/addrs/' + addr,
-        );
-        console.log(response.data);
-        // console.log(response.data.address + '\'s info load success');
-      } catch (e) {
-        console.error(addr + "'s info load failed");
-      }
-    };
     for (let i = 0; i < addressList.length; i++) {
       addressApiCall(addressList[i]);
     }
   }, []);
+
+  let listItemView = item => {
+    return (
+      <View
+        key={item.tx_hash}
+        style={{
+          backgroundColor: 'white',
+          marginTop: 10,
+          marginBottom: 10,
+          marginLeft: 10,
+          marginRight: 10,
+          paddingLeft: 5,
+          borderColor: '#424242',
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderLeftWidth: 1,
+          borderRightWidth: 1,
+          borderRadius: 8,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <View>
+          <Text style={style.smalltext}> tx_hash : {item.tx_hash}</Text>
+          <Text style={style.smalltext}> value : {item.value}</Text>
+          <Text style={style.smalltext}> confirmations : {item.confirmations}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={style.root}>
@@ -65,7 +96,10 @@ function HomeScreen({navigation}) {
       </View>
       <View style={style.Body}>
         <KeyboardAvoidingView style={{flex: 1}}>
-          <FlatList />
+          <FlatList 
+            data={txInfo.txrefs}
+            renderItem={({item}) => listItemView(item)}
+          />
         </KeyboardAvoidingView>
       </View>
       <View style={styles.container}>
