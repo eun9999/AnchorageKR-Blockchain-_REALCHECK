@@ -1,6 +1,8 @@
 import {StyleSheet} from 'react-native';
 
+
 const style = StyleSheet.create({
+  
   root: {
     flex: 1,
     flexDirection: 'column',
@@ -92,6 +94,7 @@ const style = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  
 });
 
 export default style;
