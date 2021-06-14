@@ -12,9 +12,8 @@ import Mytextinput from '../components/Mytextinput';
 import Mybutton from '../components/Mybutton';
 import SQLite from 'react-native-sqlite-2';
 import style from '../components/styles';
-import {Component} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-//import {TouchableOpacity} from 'react-native-gesture-handler';
+
 var db = '';
 if ((db = SQLite.openDatabase('pubKey.db', '1.0', '', 1))) {
   console.log('success');
@@ -70,23 +69,11 @@ const RegisterUser = ({navigation}) => {
         var temp = [];
         for (let i = 0; i < res.rows.length; ++i) {
           temp.push(res.rows.item(i));
-          setList(temp);
         }
+        setList(temp);
         console.log(list);
       });
     });
-  };
-
-  let Delete = () => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'DELETE FROM pubKey',
-        [],
-        (tx, res) => {},
-        (tx, err) => {},
-      );
-    });
-    setList([]);
   };
 
   let DeleteItem = addr => {
@@ -165,7 +152,6 @@ const RegisterUser = ({navigation}) => {
               style={{textAlignVertical: 'top', padding: 10}}
             />
             <Mybutton title="Submit" customClick={registerKey} />
-            <Mybutton title="Delete" customClick={Delete} />
             <Text style={style.text}>Address List</Text>
             <View style={{flex: 1, backgroundColor: '#525252'}}>
               <KeyboardAvoidingView style={{flex: 1}}>

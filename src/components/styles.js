@@ -1,8 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-
 const style = StyleSheet.create({
-  
   root: {
     flex: 1,
     flexDirection: 'column',
@@ -10,7 +8,7 @@ const style = StyleSheet.create({
   },
   Header: {
     width: '100%',
-    height: '5%',
+    height: '10%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,7 +24,7 @@ const style = StyleSheet.create({
   },
   Body: {
     width: '100%',
-    flex: 1,
+    flex: 2,
     backgroundColor: '#525252',
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,10 +36,16 @@ const style = StyleSheet.create({
     alignItems: 'flex-end',
   },
   text: {
-    fontSize: 30,
+    fontSize: 20,
     color: 'white',
     fontStyle: 'italic',
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  middletext: {
+    fontSize: 15,
+    color: 'white',
+    fontStyle: 'normal',
     textAlign: 'center',
   },
   smalltext: {
@@ -70,8 +74,10 @@ const style = StyleSheet.create({
     borderRadius: 8,
   },
   container: {
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#525252',
   },
   checkboxContainer: {
     flexDirection: 'row',
@@ -94,7 +100,22 @@ const style = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
-  
+  nameButton: {
+    width: '17%',
+    height: '60%',
+    backgroundColor: '#8B1919',
+    marginLeft: '1%',
+    marginRight: '1%',
+    justifyContent: 'space-around',
+    borderRadius: 8,
+  },
+  nameContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#525252',
+  },
 });
 
 export default style;

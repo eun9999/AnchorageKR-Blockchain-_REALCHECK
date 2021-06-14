@@ -35,9 +35,11 @@ export default function App() {
         tabBarOptions={{
           style: {
             backgroundColor: 'black',
+            borderColor: 'black',
           },
           activeTintColor: 'white',
           inactiveTintColor: 'white',
+          keyboardHidesTabBar: true,
         }}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="PubKey" component={InsertPubKey} />

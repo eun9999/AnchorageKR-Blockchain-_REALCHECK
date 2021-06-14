@@ -10,9 +10,6 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
 import SQLite from 'react-native-sqlite-2';
 
 import style from '../components/styles';
@@ -23,15 +20,32 @@ import {
   handleCancel,
 } from './src/notification';
 
-
-
-
 var db = '';
 db = SQLite.openDatabase('pubKey.db', '1.0', '', 1);
 
 function HomeScreen({navigation}) {
   let [addressList, setAddressList] = useState([]);
+  let [nameList, setNameList] = useState([]);
   let [txInfo, setTxInfo] = useState([]);
+  useEffect(() => {
+    createChannel();
+    view();
+  }, []);
+
+  const view = () => {
+    db.transaction(tx => {
+      tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
+        var temp = [];
+        var temp2 = [];
+        for (let i = 0; i < res.rows.length; ++i) {
+          temp.push(res.rows.item(i).key);
+          temp2.push(res.rows.item(i).name);
+        }
+        setAddressList(temp);
+        setNameList(temp2);
+      });
+    });
+  };
 
   const addressApiCall = async addr => {
     try {
@@ -47,26 +61,9 @@ function HomeScreen({navigation}) {
     }
   };
 
-  useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
-        var temp = [];
-        for (let i = 0; i < res.rows.length; ++i) {
-          temp.push(res.rows.item(i).key);
-          setAddressList(temp);
-        }
-      });
-    });
-    console.log(addressList);
-    for (let i = 0; i < addressList.length; i++) {
-      addressApiCall(addressList[i]);
-    }
-  }, []);
-
   let listItemView = item => {
     return (
       <View
-        key={item.tx_hash}
         style={{
           backgroundColor: 'white',
           marginTop: 10,
@@ -85,8 +82,11 @@ function HomeScreen({navigation}) {
         }}>
         <View>
           <Text style={style.smalltext}> tx_hash : {item.tx_hash}</Text>
-          <Text style={style.smalltext}> value : {item.value}</Text>
-          <Text style={style.smalltext}> confirmations : {item.confirmations}</Text>
+          <Text style={style.smalltext}> value(satoshi) : {item.value}</Text>
+          <Text style={style.smalltext}>
+            {' '}
+            confirmations : {item.confirmations}
+          </Text>
         </View>
       </View>
     );
@@ -97,49 +97,93 @@ function HomeScreen({navigation}) {
       <View style={style.Header}>
         <Text style={style.text}> Watch Bot </Text>
       </View>
+      <View style={style.container}>
+        <View style={style.nameContainer}>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[0])}>
+            <Text style={style.middletext}>{nameList[0]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[1])}>
+            <Text style={style.middletext}>{nameList[1]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[2])}>
+            <Text style={style.middletext}>{nameList[2]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[3])}>
+            <Text style={style.middletext}>{nameList[3]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[4])}>
+            <Text style={style.middletext}>{nameList[4]}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.nameContainer}>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[5])}>
+            <Text style={style.middletext}>{nameList[5]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[6])}>
+            <Text style={style.middletext}>{nameList[6]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[7])}>
+            <Text style={style.middletext}>{nameList[7]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[8])}>
+            <Text style={style.middletext}>{nameList[8]}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.nameButton}
+            activeOpacity={0.6}
+            onPress={() => addressApiCall(addressList[9])}>
+            <Text style={style.middletext}>{nameList[9]}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
-      
-
-      
-      
       <View style={style.Body}>
         <KeyboardAvoidingView style={{flex: 1}}>
-          <FlatList 
+          <Text></Text>
+          <FlatList
             data={txInfo.txrefs}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => listItemView(item)}
           />
         </KeyboardAvoidingView>
       </View>
-      <View style={styles.container}>
-        
-        <Text>Push Notification</Text>
+
+      <View style={style.container}>
         <TouchableOpacity
-          activeOpacity={(0, 6)}
+          style={style.nameButton}
+          activeOpacity={0.6}
           onPress={() => showNotification('watchbot', 'hello', 'message')}>
-          <View style={styles.button}>
-            <Text style={styles.button}>Click me to get notification</Text>
-          </View>
+          <Text style={style.text}>Click me to get notification</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 export default HomeScreen;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#525252',
-  },
-  button: {
-    padding: 16,
-    backgroundColor: 'blue',
-    borderRadius: 24,
-    marginTop: 16,
-  },
-  buttonTitle: {
-    color: 'white',
-  },
-});
-
