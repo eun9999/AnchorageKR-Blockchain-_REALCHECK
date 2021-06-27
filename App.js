@@ -79,38 +79,11 @@ export default function App() {
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
         />
- 
+      </Stack.Navigator>
    
 
 
      
-      
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName;
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'PubKey') {
-              iconName = focused ? 'key' : 'key-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            }
-            return <Icon name={iconName} size={size} color={'white'} />;
-          },
-        })}
-        {/* tabBarOptions={{
-          style: {
-            backgroundColor: 'black',
-            borderColor: 'black',
-          },
-          activeTintColor: 'white',
-          inactiveTintColor: 'white',
-          keyboardHidesTabBar: true,
-        }}> */}
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="PubKey" component={InsertPubKey} />
-        <Stack.Screen name="Settings" component={SettingScreen} />
-      </Stack.Navigator>
     </NavigationContainer>
   
   );

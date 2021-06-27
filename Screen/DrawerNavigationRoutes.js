@@ -3,19 +3,24 @@
 
 // Import React
 import React from 'react';
+import HomeScreen from '../src/screens/HomeScreen';
+import InsertPubKey from '../src/screens/InsertPubKey';
+import SettingScreen from '../src/screens/SettingScreen';
 
 // Import Navigators from React Navigation
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 // Import Screens
-import HomeScreen from './DrawerScreens/HomeScreen';
+//import HomeScreen from './DrawerScreens/HomeScreen';
 import SettingsScreen from './DrawerScreens/SettingsScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 const homeScreenStack = ({navigation}) => {
   return (
@@ -70,29 +75,55 @@ const settingScreenStack = ({navigation}) => {
 
 const DrawerNavigatorRoutes = (props) => {
   return (
-    <Drawer.Navigator
-      drawerContentOptions={{
-        activeTintColor: '#cee1f2',
-        color: '#cee1f2',
-        itemStyle: {marginVertical: 5, color: 'white'},
-        labelStyle: {
-          color: '#d8d8d8',
-        },
-      }}
-      screenOptions={{headerShown: false}}
-      drawerContent={CustomSidebarMenu}
-      >
-      <Drawer.Screen
-        name="homeScreenStack"
-        options={{drawerLabel: 'Home Screen'}}
-        component={homeScreenStack}
-      />
-      <Drawer.Screen
-        name="settingScreenStack"
-        options={{drawerLabel: 'Setting Screen'}}
-        component={settingScreenStack}
-      />
-    </Drawer.Navigator>
+     <Tab.Navigator
+    //   drawerContentOptions={{
+    //     activeTintColor: '#cee1f2',
+    //     color: '#cee1f2',
+    //     itemStyle: {marginVertical: 5, color: 'white'},
+    //     labelStyle: {
+    //       color: '#d8d8d8',
+    //     },
+    //   }}
+    //   screenOptions={{headerShown: false}}
+    //   drawerContent={CustomSidebarMenu}
+    //   >
+    //   <Tab.Screen
+    //     name="homeScreenStack"
+    //     options={{drawerLabel: 'Home Screen'}}
+    //     component={homeScreenStack}
+    //   />
+    //   <Tab.Screen
+    //     name="settingScreenStack"
+    //     options={{drawerLabel: 'Setting Screen'}}
+    //     component={settingScreenStack}
+    //   />
+  
+    screenOptions={({route}) => ({
+      tabBarIcon: ({focused, color, size}) => {
+        let iconName;
+        if (route.name === 'Home') {
+          iconName = focused ? 'home' : 'home-outline';
+        } else if (route.name === 'PubKey') {
+          iconName = focused ? 'key' : 'key-outline';
+        } else if (route.name === 'Settings') {
+          iconName = focused ? 'settings' : 'settings-outline';
+        }
+        return <Icon name={iconName} size={size} color={'white'} />;
+      },
+    })}
+    tabBarOptions={{
+      style: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+      },
+      activeTintColor: 'white',
+      inactiveTintColor: 'white',
+      keyboardHidesTabBar: true,
+    }}>
+    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="PubKey" component={InsertPubKey} />
+    <Tab.Screen name="Settings" component={SettingScreen} />
+  </Tab.Navigator>
   );
 };
 
