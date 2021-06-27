@@ -99,7 +99,7 @@ const RegisterScreen = (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#307ecc',
+          backgroundColor: '#525252',
           justifyContent: 'center',
         }}>
         <Image
@@ -110,6 +110,7 @@ const RegisterScreen = (props) => {
             alignSelf: 'center'
           }}
         />
+         
         <Text style={styles.successTextStyle}>
           Registration Successful
         </Text>
@@ -123,7 +124,7 @@ const RegisterScreen = (props) => {
     );
   }
   return (
-    <View style={{flex: 1, backgroundColor: '#307ecc'}}>
+    <View style={{flex: 1, backgroundColor: '#525252'}}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -132,7 +133,7 @@ const RegisterScreen = (props) => {
           alignContent: 'center',
         }}>
         <View style={{alignItems: 'center'}}>
-          <Image
+          {/* <Image
             source={require('../Image/aboutreact.png')}
             style={{
               width: '50%',
@@ -140,7 +141,13 @@ const RegisterScreen = (props) => {
               resizeMode: 'contain',
               margin: 30,
             }}
-          />
+          /> */}
+              <Text style={ {fontSize: 50,
+              color: 'white',
+              fontStyle: 'italic',
+              fontWeight: 'bold',
+              textAlign: 'center'}}> REGISTER
+              </Text>
         </View>
            
         <KeyboardAvoidingView enabled>
@@ -224,7 +231,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#424242',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',

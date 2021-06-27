@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet,TouchableOpacity,Alert} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import style from '../components/styles';
 import CheckBox from '@react-native-community/checkbox';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const placeholder = {
   label: 'min',
@@ -13,7 +14,7 @@ const placeholder2 = {
   value: null,
 };
 
-const App = () => {
+const App = (props) => {
   const [isSelected, setSelection] = useState('');
   const [bisSelected, bsetSelection] = useState('');
   const [refreshisSelected, refreshsetSelection] = useState('');
@@ -119,8 +120,38 @@ const App = () => {
 
         <Text style={style.label}>초</Text>
       </View>
+      <View style={style.container}>
+        <TouchableOpacity
+          style={style.nameButton}
+          activeOpacity={0.6}
+          onPress={() => {
+            Alert.alert(
+              '로그아웃',
+              '로그아웃하시겠습니까?',
+              [
+                {
+                  text: '아니오',
+                  onPress: () => {
+                    return null;
+                  },
+                },
+                {
+                  text: '예',
+                  onPress: () => {
+                    AsyncStorage.clear();
+                    props.navigation.replace('Auth');
+                  },
+                },
+              ],
+              {cancelable: false},
+            );
+          }}>
+          <Text style={style.text}>로그아웃</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
+
 };
 
 export default App;

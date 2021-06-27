@@ -90,8 +90,16 @@ const LoginScreen = ({navigation}) => {
         }}>
         <View>
           <KeyboardAvoidingView enabled>
+          <View style={{alignItems: 'center'}}>
+              <Text style={ {fontSize: 20,
+              color: 'white',
+              fontStyle: 'italic',
+              fontWeight: 'bold',
+              textAlign: 'center'}}> WATCHBOT
+              </Text>
+            </View>
             <View style={{alignItems: 'center'}}>
-              <Image
+              {/* <Image
                 source={require('../Image/aboutreact.png')}
                 style={{
                   width: '50%',
@@ -99,7 +107,13 @@ const LoginScreen = ({navigation}) => {
                   resizeMode: 'contain',
                   margin: 30,
                 }}
-              />
+              /> */}
+              <Text style={ {fontSize: 50,
+              color: 'white',
+              fontStyle: 'italic',
+              fontWeight: 'bold',
+              textAlign: 'center'}}> LOGIN
+              </Text>
             </View>
             <View style={styles.SectionStyle}>
               <TextInput
@@ -165,7 +179,7 @@ const styles = StyleSheet.create({
   mainBody: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#525252',
     alignContent: 'center',
   },
   SectionStyle: {
@@ -177,7 +191,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#424242',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',
