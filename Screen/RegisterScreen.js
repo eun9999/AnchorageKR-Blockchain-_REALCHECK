@@ -20,8 +20,6 @@ import Loader from './Components/Loader';
 const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userAge, setUserAge] = useState('');
-  const [userAddress, setUserAddress] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -132,17 +130,11 @@ const RegisterScreen = (props) => {
           justifyContent: 'center',
           alignContent: 'center',
         }}>
+
+
+          
         <View style={{alignItems: 'center'}}>
-          {/* <Image
-            source={require('../Image/aboutreact.png')}
-            style={{
-              width: '50%',
-              height: 100,
-              resizeMode: 'contain',
-              margin: 30,
-            }}
-          /> */}
-              <Text style={ {fontSize: 50,
+             <Text style={ {fontSize: 50,
               color: 'white',
               fontStyle: 'italic',
               fontWeight: 'bold',
