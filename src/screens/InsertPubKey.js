@@ -92,24 +92,7 @@ const RegisterUser = ({navigation}) => {
 
   let listItemView = item => {
     return (
-      <View
-        key={item.key}
-        style={{
-          backgroundColor: 'white',
-          marginTop: 10,
-          marginBottom: 10,
-          marginLeft: 10,
-          marginRight: 10,
-          paddingLeft: 5,
-          borderColor: '#424242',
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderLeftWidth: 1,
-          borderRightWidth: 1,
-          borderRadius: 8,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
+      <View key={item.key} style={style.ListView}>
         <View>
           <Text style={style.smalltext}>{item.name}</Text>
           <Text style={style.smalltext}>{item.key}</Text>

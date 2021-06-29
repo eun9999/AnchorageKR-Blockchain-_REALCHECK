@@ -63,23 +63,7 @@ function HomeScreen({navigation}) {
 
   let listItemView = item => {
     return (
-      <View
-        style={{
-          backgroundColor: 'white',
-          marginTop: 10,
-          marginBottom: 10,
-          marginLeft: 10,
-          marginRight: 10,
-          paddingLeft: 5,
-          borderColor: '#424242',
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderLeftWidth: 1,
-          borderRightWidth: 1,
-          borderRadius: 8,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
+      <View style={style.listView}>
         <View>
           <Text style={style.smalltext}> tx_hash : {item.tx_hash}</Text>
           <Text style={style.smalltext}> value(satoshi) : {item.value}</Text>

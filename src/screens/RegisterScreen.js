@@ -31,7 +31,7 @@ const RegisterScreen = props => {
       PSWD: userPSWD,
     };
     axios
-      .post('http://172.20.10.10:5000/api/user/register', data)
+      .post('http://118.47.21.114:5000/api/user/register', data)
       .then(function (response) {
         console.log(response.data.msg);
         setErrortext(response.data.msg);
@@ -41,6 +41,11 @@ const RegisterScreen = props => {
       });
     setUserID('');
     setUserPSWD('');
+    axios
+      .get('http://118.47.21.114:5000/api/user/register')
+      .then(function (response) {
+        console.log(response.data);
+      });
   };
 
   return (
@@ -63,15 +68,29 @@ const RegisterScreen = props => {
               onChangeText={userID => setUserID(userID)}
               style={{padding: 10}}
             />
-            <Mytextinput
-              placeholder="Enter PSWD"
-              value={userPSWD}
-              onChangeText={userPSWD => setUserPSWD(userPSWD)}
-              maxLength={20}
-              multiline={true}
-              secureTextEntry={true}
-              style={{padding: 10}}
-            />
+            <View
+              style={{
+                marginLeft: 30,
+                marginRight: 30,
+                marginTop: 10,
+                borderRadius: 5,
+                backgroundColor: 'white',
+              }}>
+              <TextInput
+                placeholder="Enter Password"
+                value={userPSWD}
+                onChangeText={userPSWD => setUserPSWD(userPSWD)}
+                maxLength={20}
+                multiline={false}
+                style={{textAlignVertical: 'top', padding: 10}}
+                secureTextEntry={true}
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                placeholderTextColor="#525252"
+                autoCapitalize={'none'}
+                blurOnSubmit={false}
+              />
+            </View>
           </View>
 
           <Mybutton title="Register" customClick={registerKey} />
