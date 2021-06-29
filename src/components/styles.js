@@ -35,6 +35,13 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'flex-end',
   },
+  Largetext: {
+    fontSize: 50,
+    color: 'white',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   text: {
     fontSize: 20,
     color: 'white',
@@ -115,6 +122,56 @@ const style = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#525252',
+  },
+  // registerscreen.js styles
+  SectionStyle: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  //loginscreen.js
+  mainBody: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#525252',
+    alignContent: 'center',
+  },
+  LoginSectionStyle: {
+    marginTop: 20,
+    marginLeft: 35,
+    marginRight: 35,
+    margin: 10,
+  },
+  buttonStyle: {
+    backgroundColor: '#424242',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#7DE24E',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    marginTop: 20,
+    marginBottom: 25,
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 16,
+  },
+
+  registerTextStyle: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    alignSelf: 'center',
+    padding: 10,
+  },
+  errorTextStyle: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: 14,
   },
 });
 

@@ -10,16 +10,11 @@ import InsertPubKey from './src/screens/InsertPubKey';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen';
 
-
-
-
-
 // Import Screens
 
-import LoginScreen from './Screen/LoginScreen';
-import RegisterScreen from './Screen/RegisterScreen';
-import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
-
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import DrawerNavigationRoutes from './src/screens/DrawerNavigationRoutes';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -58,21 +53,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Auth">
-        {/* SplashScreen which will come once for 5 Seconds
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          // Hiding header for Splash Screen
-          options={{headerShown: false}}
-        /> */}
-
         {/* Auth Navigator: Include Login and Signup */}
         <Stack.Screen
           name="Auth"
           component={Auth}
           options={{headerShown: false}}
         />
-          
+
         <Stack.Screen
           name="DrawerNavigationRoutes"
           component={DrawerNavigationRoutes}
@@ -80,11 +67,6 @@ export default function App() {
           options={{headerShown: false}}
         />
       </Stack.Navigator>
-   
-
-
-     
     </NavigationContainer>
-  
   );
 }
