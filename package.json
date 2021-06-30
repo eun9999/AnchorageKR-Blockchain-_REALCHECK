@@ -14,14 +14,16 @@
   "dependencies": {
     "axios": "0.21.1",
     "body-parser": "1.19.0",
+    "button": "^1.1.1",
     "concurrently": "6.2.0",
     "dotenv": "10.0.0",
-    "express": "4.17.1",
+    "express": "^4.17.1",
     "http-proxy-middleware": "2.0.0",
-    "mysql": "2.18.1",
+    "mysql": "^2.18.1",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "request": "2.88.2"
+    "request": "2.88.2",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "7.14.6",

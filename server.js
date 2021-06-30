@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const rpcMethods = require('./routes/api');
-
+const mysql = require('mysql');
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
