@@ -30,6 +30,14 @@ const RegisterScreen = props => {
       ID: userID,
       PSWD: userPSWD,
     };
+    if (!userID) {
+      alert('Please fill ID');
+      return;
+    }
+    if (!userPSWD) {
+      alert('Please fill Password');
+      return;
+    }
     axios
       .post('http://118.47.21.114:5000/api/user/register', data)
       .then(function (response) {

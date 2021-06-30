@@ -92,7 +92,7 @@ const RegisterUser = ({navigation}) => {
 
   let listItemView = item => {
     return (
-      <View key={item.key} style={style.ListView}>
+      <View key={item.key} style={style.FlatListView}>
         <View>
           <Text style={style.smalltext}>{item.name}</Text>
           <Text style={style.smalltext}>{item.key}</Text>

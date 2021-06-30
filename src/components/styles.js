@@ -123,6 +123,23 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#525252',
   },
+  FlatListView: {
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderColor: '#424242',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   // registerscreen.js styles
   SectionStyle: {
     flex: 1,

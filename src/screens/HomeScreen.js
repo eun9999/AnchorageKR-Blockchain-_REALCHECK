@@ -27,6 +27,7 @@ function HomeScreen({navigation}) {
   let [addressList, setAddressList] = useState([]);
   let [nameList, setNameList] = useState([]);
   let [txInfo, setTxInfo] = useState([]);
+  let [userID, setUserID] = useState('');
   useEffect(() => {
     createChannel();
     view();
@@ -34,6 +35,11 @@ function HomeScreen({navigation}) {
 
   const view = () => {
     db.transaction(tx => {
+      tx.executeSql('SELECT * FROM ID', [], function (tx, res) {
+        for (let i = 0; i < res.rows.length; ++i) {
+          setUserID(res.rows.item(0).id);
+        }
+      });
       tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
         var temp = [];
         var temp2 = [];
@@ -43,33 +49,54 @@ function HomeScreen({navigation}) {
         }
         setAddressList(temp);
         setNameList(temp2);
+        console.log(addressList);
       });
     });
   };
 
-  const addressApiCall = async addr => {
+  const importaddress = async addr => {
     try {
-      const response = await axios.get(
-        'https://api.blockcypher.com/v1/btc/main/addrs/' + addr,
-      );
-      setTxInfo(response.data);
-      //console.log(response.data);
-      //console.log(response.data.address + '\'s info load success');
+      for (let i = 0; i < addr.length; i++) {
+        const response = await axios.get(
+          'http://118.47.21.114:5000/api/importaddress/' + addr,
+        );
+      }
     } catch (e) {
       console.error(addr + "'s info load failed");
-      console.error(e);
+      console.log(e);
     }
+  };
+
+  const addressApiCall = async addr => {
+    const data = {
+      ID: userID,
+      addr: addr,
+    };
+    axios
+      .post('http://118.47.21.114:5000/api/listtransactions', data)
+      .then(function (response) {
+        setTxInfo(response.data);
+        console.log('txinfo : ', txInfo.result.details);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
   };
 
   let listItemView = item => {
     return (
-      <View style={style.listView}>
+      <View style={style.FlatListView}>
         <View>
-          <Text style={style.smalltext}> tx_hash : {item.tx_hash}</Text>
-          <Text style={style.smalltext}> value(satoshi) : {item.value}</Text>
+          <Text style={style.smalltext}> txid : {item.result.txid}</Text>
           <Text style={style.smalltext}>
             {' '}
-            confirmations : {item.confirmations}
+            address : {item.result.details.address}
+          </Text>
+
+          <Text style={style.smalltext}> amount : {item.result.amount}</Text>
+          <Text style={style.smalltext}>
+            {' '}
+            confirmations : {item.result.confirmations}
           </Text>
         </View>
       </View>
@@ -86,73 +113,22 @@ function HomeScreen({navigation}) {
           <TouchableOpacity
             style={style.nameButton}
             activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[0])}>
-            <Text style={style.middletext}>{nameList[0]}</Text>
+            onPress={() => importaddress(addressList)}>
+            <Text style={style.middletext}>importAddress</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={style.nameButton}
             activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[1])}>
-            <Text style={style.middletext}>{nameList[1]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[2])}>
-            <Text style={style.middletext}>{nameList[2]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[3])}>
-            <Text style={style.middletext}>{nameList[3]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[4])}>
-            <Text style={style.middletext}>{nameList[4]}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={style.nameContainer}>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[5])}>
-            <Text style={style.middletext}>{nameList[5]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[6])}>
-            <Text style={style.middletext}>{nameList[6]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[7])}>
-            <Text style={style.middletext}>{nameList[7]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[8])}>
-            <Text style={style.middletext}>{nameList[8]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.nameButton}
-            activeOpacity={0.6}
-            onPress={() => addressApiCall(addressList[9])}>
-            <Text style={style.middletext}>{nameList[9]}</Text>
+            onPress={() => addressApiCall(addressList)}>
+            <Text style={style.middletext}>Refresh</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={style.Body}>
         <KeyboardAvoidingView style={{flex: 1}}>
-          <Text></Text>
           <FlatList
-            data={txInfo.txrefs}
+            data={txInfo}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => listItemView(item)}
           />
@@ -164,7 +140,7 @@ function HomeScreen({navigation}) {
           style={style.nameButton}
           activeOpacity={0.6}
           onPress={() => showNotification('watchbot', 'hello', 'message')}>
-          <Text style={style.text}>Click me to get notification</Text>
+          <Text style={style.text}>notification</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
