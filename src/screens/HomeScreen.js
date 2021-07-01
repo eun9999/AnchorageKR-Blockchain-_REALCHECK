@@ -38,6 +38,7 @@ function HomeScreen({navigation}) {
       tx.executeSql('SELECT * FROM ID', [], function (tx, res) {
         for (let i = 0; i < res.rows.length; ++i) {
           setUserID(res.rows.item(0).id);
+          console.log('userID : ', userID);
         }
       });
       tx.executeSql('SELECT * FROM pubKey', [], function (tx, res) {
@@ -75,8 +76,9 @@ function HomeScreen({navigation}) {
     axios
       .post('http://118.47.21.114:5000/api/listtransactions', data)
       .then(function (response) {
+        console.log('res : ', response.data);
         setTxInfo(response.data);
-        console.log('txinfo : ', txInfo.result.details);
+        console.log('txinfo : ', txInfo[0].result.details[0].address);
       })
       .catch(function (error) {
         console.log(error.response);
@@ -90,7 +92,7 @@ function HomeScreen({navigation}) {
           <Text style={style.smalltext}> txid : {item.result.txid}</Text>
           <Text style={style.smalltext}>
             {' '}
-            address : {item.result.details.address}
+            address : {item.result.details[0].address}
           </Text>
 
           <Text style={style.smalltext}> amount : {item.result.amount}</Text>
