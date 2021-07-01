@@ -3,6 +3,7 @@ const router = express.Router();
 var request = require('request');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
+const { jar } = require('request');
 dotenv.config();
 
 const USER = process.env.RPC_USER;
@@ -152,24 +153,27 @@ router.post('/listtransactions', (req, res) => {
     callback = (error, response, body) => {
       if (!error && response.statusCode == 200) {
         const data = JSON.parse(body);
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!', data.result[0].txid);
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!', data.result.length);
         let checkDup = 'SELECT EXISTS (SELECT ID FROM txid WHERE ID=(?) AND TXID=(?)) as success'
         let sql = 'INSERT INTO txid (ID,TXID) VALUES(?,?)';
-        connection.query(checkDup, [ID,data.result[0].txid], function (err, result) { //중복확인(TXID가 text type이라 unique같은거 못썼음)
-          if(result[0].success == 1){
-            console.log("이미 있는 id와 txid 입니다.");
-          }
-          else{
-            connection.query(sql, [ID,data.result[0].txid], function (err, result) { //중복 row 없으면 insert
-              if (err)
-                console.log("error");
-              else {
-                console.log("txid 입력 완료 !");
-                
-              }
-            });
-          }
-        });
+        for(let j = 0; j < data.result.length; j++){
+          connection.query(checkDup, [ID,data.result[j].txid], function (err, result) { //중복확인(TXID가 text type이라 unique같은거 못썼음)
+            if(result[0].success == 1){
+              console.log("이미 있는 id와 txid 입니다.");
+            }
+            else{
+              connection.query(sql, [ID,data.result[j].txid], function (err, result) { //중복 row 없으면 insert
+                if (err)
+                  console.log("error");
+                else {
+                  console.log("txid 입력 완료 !");
+                  
+                }
+              });
+            }
+          });
+        }
+        
       }
     };
     request(options, callback);
@@ -179,9 +183,6 @@ router.post('/listtransactions', (req, res) => {
       let sql = 'SELECT TXID FROM txid WHERE ID=(?)';
       connection.query(sql, [ID] , function(err,result) {
         txid = result;
-        console.log("data  : ", txid[0].TXID);
-        console.log("data  : ", txid[1].TXID);
-        console.log("data  : ", txid[2].TXID);
         
         for(let i = 0; i<txid.length; i++){
           var dataString2 = `{"jsonrpc":"1.0","id":"curltext","method":"gettransaction","params":["${txid[i].TXID}",true,true]}`;
@@ -194,7 +195,7 @@ router.post('/listtransactions', (req, res) => {
           callback = (error, response, body) => {
             if (!error && response.statusCode == 200) {
               data.push(JSON.parse(body));
-              console.log("gettransac", data);
+              //console.log("gettransac", data);
               if(i==txid.length-1){
                 res.send(data);
               }
